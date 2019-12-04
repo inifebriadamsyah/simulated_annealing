@@ -2,11 +2,6 @@ package okhtemp;
 
 import okhtemp.Heuristics;
 
-/**
- *
- * @author Muris MainHc
- */
-
 public class MainHc {
 
     static final String DIREKTORI = "E:/Frequently Used/Edukasi/Kuliah/Semester 7/Optimasi Kombinatorik dan Heuristik/Toronto/";
