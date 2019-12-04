@@ -29,9 +29,7 @@ public class Optimizer {
         int jumlah = cm.getJumlahStudent();
         int[][] jadwal = scheduler.getSchedule();
 
-        int[][] gr = cm.getLargestDegree(copyGraph);
-
-        double penalty = Utils.getPenalty(gr, jadwal, jumlah);
+        double penalty = Utils.getPenalty(copyGraph, jadwal, jumlah);
         System.out.println(penalty);
         for (int i = 0; i < 1000; i++) {
             CourseSet csIter = new CourseSet(dir_crs);
@@ -46,9 +44,9 @@ public class Optimizer {
             schedulerIter.printSchedule(cm.getRandomIndex(graphIter.length));
             int[][] jadwalIter = schedulerIter.getSchedule();
 
-            int[][] grIter = cm.getLargestDegree(copyGraphIter);
+            //int[][] grIter = cm.getLargestDegree(copyGraphIter);
 
-            double penalty2 = Utils.getPenalty(grIter, jadwalIter, jumlah);
+            double penalty2 = Utils.getPenalty(copyGraphIter, jadwalIter, jumlah);
 
             if (penalty > penalty2) {
                 penalty = penalty2;

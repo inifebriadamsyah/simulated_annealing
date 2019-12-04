@@ -29,10 +29,10 @@ public class Main {
         int jumlah = cm.getJumlahStudent();
         int[][] jadwal = scheduler.getSchedule();
 
-        int[][] gr = cm.getLargestDegree(copyGraph);
+        //int[][] gr = cm.getLargestDegree(copyGraph);
 
         scheduler.exportSchedule(dir_stu.substring(dir_stu.length() - 12, dir_stu.length() - 4));
-        System.out.println("Penalty : " + Utils.getPenalty(gr, jadwal, jumlah));
+        System.out.println("Penalty : " + Utils.getPenalty(copyGraph, jadwal, jumlah));
         System.out.println("Total Eksekusi : " + (double) totalTime / 1000000000 + " detik");
     }
 
@@ -95,7 +95,7 @@ public class Main {
 
         int timeslot = 0;
 
-        System.out.println("=== ASIS TIMESLOTING === \n");
+        System.out.println("=== TIMESLOTING === \n");
         System.out.println("1. Car-f-92");
         System.out.println("2. Car-s-91");
         System.out.println("3. Ear-f-83");

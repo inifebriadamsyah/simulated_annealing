@@ -83,25 +83,12 @@ public class ConflictMatrix {
     }
 
     public int[][] getLargestDegree() {
-        int[][] temp = Arrays.copyOf(getMatrix(), getMatrix().length);
+        int[][] temporary = Arrays.copyOf(getMatrix(), getMatrix().length);
         int[][] courseDegree = this.getDegree();
-        int[][] largestDegree = new int[temp.length][temp.length];
-        for (int i = 0; i < temp.length; i++) {
-            for (int j = 0; j < temp.length; j++) {
-                largestDegree[i][j] = temp[courseDegree[i][0] - 1][courseDegree[j][0] - 1];
-            }
-        }
-
-        return largestDegree;
-    }
-
-    public int[][] getLargestDegree(int[][] arr) {
-        int[][] temp = arr;
-        int[][] courseDegree = this.getDegree();
-        int[][] largestDegree = new int[temp.length][temp.length];
-        for (int i = 0; i < temp.length; i++) {
-            for (int j = 0; j < temp.length; j++) {
-                largestDegree[i][j] = temp[courseDegree[i][0] - 1][courseDegree[j][0] - 1];
+        int[][] largestDegree = new int[temporary.length][temporary.length];
+        for (int i = 0; i < temporary.length; i++) {
+            for (int j = 0; j < temporary.length; j++) {
+                largestDegree[i][j] = temporary[courseDegree[i][0] - 1][courseDegree[j][0] - 1];
             }
         }
         return largestDegree;
@@ -115,13 +102,11 @@ public class ConflictMatrix {
             System.out.println();
         }
     }
+    // METHOD BUAT RANDOM SEARCH
 
-    /*
-     * METHOD BUAT RANDOM SEARCH
-     */
     public int getRandomNumber(int min, int max) {
-        Random random = new Random();
-        return random.nextInt(max - min) + min;
+        Random randomNumber = new Random();
+        return randomNumber.nextInt(max - min) + min;
     }
 
     public int[][] getRandomIndex(int size) {
