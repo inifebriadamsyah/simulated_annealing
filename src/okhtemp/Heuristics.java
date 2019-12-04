@@ -2,7 +2,7 @@ package okhtemp;
 
 import okhtemp.Utils;
 
-public class HillClimbing {
+public class Heuristics {
 
     private static int[][] jadwalTheBest;
 
@@ -15,33 +15,33 @@ public class HillClimbing {
     }
 
     public static void randomSearch(String dir_stu, String dir_crs, int timeslot) {
-        CourseSet cs = new CourseSet(dir_crs);
-        ConflictMatrix cm = new ConflictMatrix(dir_stu, cs.getSize());
+        CourseSet courseSet = new CourseSet(dir_crs);
+        ConflictMatrix conflictMatrix = new ConflictMatrix(dir_stu, courseSet.getSize());
 
-        int[][] copyGraph = Utils.copyArray(cm.getMatrix());
-        int[][] graph = cm.getRandomMatrix();
+        int[][] copyGraph = Utils.copyArray(conflictMatrix.getMatrix());
+        int[][] graph = conflictMatrix.getRandomMatrix();
 
         int jumlahTimeslot = timeslot;
-        Scheduler scheduler = new Scheduler(cs.getSize());
+        Scheduler scheduler = new Scheduler(courseSet.getSize());
         scheduler.timesloting(graph, jumlahTimeslot);
 
-        scheduler.printSchedule(cm.getRandomIndex(graph.length));
-        int jumlah = cm.getJumlahStudent();
+        scheduler.printSchedule(conflictMatrix.getRandomIndex(graph.length));
+        int jumlah = conflictMatrix.getJumlahStudent();
         int[][] jadwal = scheduler.getSchedule();
 
         double penalty = Utils.getPenalty(copyGraph, jadwal, jumlah);
         System.out.println(penalty);
         for (int i = 0; i < 1000; i++) {
             CourseSet csIter = new CourseSet(dir_crs);
-            ConflictMatrix cmIter = new ConflictMatrix(dir_stu, cs.getSize());
+            ConflictMatrix cmIter = new ConflictMatrix(dir_stu, courseSet.getSize());
 
             int[][] copyGraphIter = Utils.copyArray(cmIter.getMatrix());
-            int[][] graphIter = cm.getRandomMatrix();
+            int[][] graphIter = conflictMatrix.getRandomMatrix();
 
             Scheduler schedulerIter = new Scheduler(csIter.getSize());
 
             schedulerIter.timesloting(graphIter, jumlahTimeslot);
-            schedulerIter.printSchedule(cm.getRandomIndex(graphIter.length));
+            schedulerIter.printSchedule(conflictMatrix.getRandomIndex(graphIter.length));
             int[][] jadwalIter = schedulerIter.getSchedule();
 
             //int[][] grIter = cm.getLargestDegree(copyGraphIter);
@@ -57,17 +57,17 @@ public class HillClimbing {
     }
 
     public static void hillClimbing(String dir_stu, String dir_crs, int timeslot, int iterasi) {
-        CourseSet cs = new CourseSet(dir_crs);
-        ConflictMatrix cm = new ConflictMatrix(dir_stu, cs.getSize());
+        CourseSet courseSet = new CourseSet(dir_crs);
+        ConflictMatrix conflictMatrix = new ConflictMatrix(dir_stu, courseSet.getSize());
 
-        int[][] conflict_matrix = cm.getLargestDegree();
+        int[][] conflict_matrix = conflictMatrix.getLargestDegree();
         int jumlahTimeslot = timeslot;
 
-        Scheduler scheduler = new Scheduler(cs.getSize());
+        Scheduler scheduler = new Scheduler(courseSet.getSize());
         scheduler.timesloting(conflict_matrix, jumlahTimeslot);
-        scheduler.printSchedule(cm.getDegree());
+        scheduler.printSchedule(conflictMatrix.getDegree());
 
-        int jumlahStudent = cm.getJumlahStudent();
+        int jumlahStudent = conflictMatrix.getJumlahStudent();
 
         int[][] jadwal = scheduler.getSchedule();
         int[][] jadwalTemp = new int[jadwal.length][2];
@@ -114,9 +114,4 @@ public class HillClimbing {
         setJadwal(jadwal);
         System.out.println("Nilai penalty terbaik: "+penalty);
     }
-
-    public static void simulatedAnnealing() {
-
-    }
-
 }
