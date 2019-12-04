@@ -14,10 +14,7 @@ public class CourseSet {
 			BufferedReader br = new BufferedReader(fr);
 			
 			readCourse(br);
-		} catch(Exception e) {
-			
-		}
-		
+		} catch(Exception e) {}
 	}
 	
 	public Set<String> getCourse() {

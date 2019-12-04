@@ -2,7 +2,7 @@ package okhtemp;
 
 import okhtemp.Utils;
 
-public class Optimizer {
+public class HillClimbing {
 
     private static int[][] jadwalTheBest;
 
@@ -87,18 +87,7 @@ public class Optimizer {
                 max_timeslot = jadwal[i][1];
             }
         }
-
-		//
-//		System.out.println("Init");
-//		for(int i = 0; i < jadwal.length; i++) {
-//			System.out.println(jadwal[i][0]+ " " + jadwal[i][1]);
-//		}
-//		System.out.println();
         for (int i = 0; i < iterasi; i++) {
-//			System.out.println("iterasi "+(i+1));
-//			for(int j = 0; j < jadwal.length; j++) {
-//				System.out.println(jadwal[j][0]+ " " + jadwal[j][1]);
-//			}
 
             int randomCourseIndex = Utils.getRandomNumber(0, conflict_matrix.length);
             int randomTimeslot = Utils.getRandomNumber(0, max_timeslot);
@@ -118,7 +107,6 @@ public class Optimizer {
                     jadwalTemp[randomCourseIndex][1] = jadwal[randomCourseIndex][1];
                 }
             }
-//			System.out.println("\n###\n");
 //			
             System.out.println("Iterasi " + (i + 1) + " - Penalty : " + penalty);
         }

@@ -1,6 +1,6 @@
 package okhtemp;
 
-import okhtemp.Optimizer;
+import okhtemp.HillClimbing;
 
 /**
  *
@@ -20,10 +20,10 @@ public class MainHc {
         String test_crs = DIREKTORI + "test.crs";
 
         long startTime = System.nanoTime();
-        Optimizer.hillClimbing(stud_set, crs_set, 100, 100000);
+        HillClimbing.hillClimbing(stud_set, crs_set, 100, 100000);
         long endTime = System.nanoTime();
         System.out.println("Runtime: " +(double) (endTime - startTime) / 1000000000);
-        int[][] jadwal = Optimizer.getJadwal();
+        int[][] jadwal = HillClimbing.getJadwal();
         for (int i = 0; i < jadwal.length; i++) {
             System.out.println(jadwal[i][0] + " " + jadwal[i][1]);
         }
