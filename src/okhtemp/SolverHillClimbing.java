@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Solver {
+public class SolverHillClimbing {
 
     public static int getRandomNumber(int min, int max) {
-        Random random = new Random();
-        return random.nextInt(max - min) + min;
+        Random randomNumber = new Random();
+        return randomNumber.nextInt(max - min) + min;
     }
 
     public static int[][] getRandomIndex(int size) {
