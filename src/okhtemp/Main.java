@@ -10,23 +10,23 @@ public class Main {
 
     public static void execute(String dir_stu, String dir_crs, int timeslot) {
 
-        CourseSet cs = new CourseSet(dir_crs);
-        ConflictMatrix cm = new ConflictMatrix(dir_stu, cs.getSize());
-        int[][] copyGraph = Utils.copyArray(cm.getMatrix());
-        int[][] graph = cm.getLargestDegree();
+        CourseSet courseSet = new CourseSet(dir_crs);
+        ConflictMatrix conflictMatrix = new ConflictMatrix(dir_stu, courseSet.getSize());
+        int[][] copyGraph = Utils.copyArray(conflictMatrix.getMatrix());
+        int[][] graph = conflictMatrix.getLargestDegree();
         int jumlah_timeslot = timeslot;
 
         // Start
         long startTime = System.nanoTime();
-        Scheduler scheduler = new Scheduler(cs.getSize());
+        Scheduler scheduler = new Scheduler(courseSet.getSize());
         scheduler.timesloting(graph, jumlah_timeslot);
 
         long endTime = System.nanoTime();
         long totalTime = endTime - startTime;
 		// End
 
-        scheduler.printSchedule(cm.getDegree());
-        int jumlah = cm.getJumlahStudent();
+        scheduler.printSchedule(conflictMatrix.getDegree());
+        int jumlah = conflictMatrix.getJumlahStudent();
         int[][] jadwal = scheduler.getSchedule();
 
         //int[][] gr = cm.getLargestDegree(copyGraph);
