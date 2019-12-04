@@ -12,33 +12,33 @@ import java.util.Random;
 public class ConflictMatrix {
 
     int[][] conflict_matrix;
-    int jumlah_student = 0;
+    int total_student = 0;
 
     public ConflictMatrix(String dir, int size) {
         conflict_matrix = new int[size][size];
         try {
-            FileReader fr = new FileReader(dir);
-            BufferedReader br = new BufferedReader(fr);
+            FileReader firereader = new FileReader(dir);
+            BufferedReader bufferedreader = new BufferedReader(firereader);
 
-            creatiingMatrix(br);
+            buildMatrix(bufferedreader);
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
     public int getJumlahStudent() {
-        return this.jumlah_student;
+        return this.total_student;
     }
 
     public int[][] getMatrix() {
         return conflict_matrix;
     }
 
-    public void creatiingMatrix(BufferedReader br) {
+    public void buildMatrix(BufferedReader bufferedreader) {
         String courseLine = null;
         try {
-            while ((courseLine = br.readLine()) != null) {
-                jumlah_student++;
+            while ((courseLine = bufferedreader.readLine()) != null) {
+                total_student++;
                 String[] arr = courseLine.split(" ");
                 if (arr.length > 1) {
                     for (int i = 0; i < arr.length - 1; i++) {
@@ -56,28 +56,28 @@ public class ConflictMatrix {
         } catch (Exception e) {   }
     }
 
-    public static void sortDegree(int arr[][], int col) {
-        Comparator<int[]> byDegree = Comparator.comparing(row -> row[1]);
-        Comparator<int[]> byCourse = Comparator.comparing(row -> row[0]);
+    public static void sortingDegree(int array[][], int collumn) {
+        Comparator<int[]> degree = Comparator.comparing(row -> row[1]);
+        Comparator<int[]> course = Comparator.comparing(row -> row[0]);
 
-        Arrays.sort(arr, Collections.reverseOrder(byDegree.thenComparing(byCourse.reversed())));
+        Arrays.sort(array, Collections.reverseOrder(degree.thenComparing(course.reversed())));
     }
 
     public int[][] getDegree() {
-        int[][] temp = Arrays.copyOf(getMatrix(), getMatrix().length);
-        int[][] courseDegree = new int[temp.length][2];
+        int[][] temporary = Arrays.copyOf(getMatrix(), getMatrix().length);
+        int[][] courseDegree = new int[temporary.length][2];
 
-        for (int i = 0; i < temp.length; i++) {
+        for (int i = 0; i < temporary.length; i++) {
             int count = 0;
-            for (int j = 0; j < temp.length; j++) {
-                if (temp[i][j] != 0) {
+            for (int j = 0; j < temporary.length; j++) {
+                if (temporary[i][j] != 0) {
                     count++;
                 }
             }
             courseDegree[i][0] = i + 1;
             courseDegree[i][1] = count;
         }
-        sortDegree(courseDegree, 1);
+        sortingDegree(courseDegree, 1);
 
         return courseDegree;
     }
@@ -104,9 +104,7 @@ public class ConflictMatrix {
                 largestDegree[i][j] = temp[courseDegree[i][0] - 1][courseDegree[j][0] - 1];
             }
         }
-
         return largestDegree;
-
     }
 
     public void printMatrix() {
@@ -139,7 +137,6 @@ public class ConflictMatrix {
             randomIndex[i][0] = course.get(randomNumber);
             course.remove(randomNumber);
         }
-
         return randomIndex;
     }
 
