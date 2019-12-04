@@ -112,6 +112,6 @@ public class Heuristics {
         }
 
         setJadwal(jadwal);
-        System.out.println("Nilai penalty terbaik: "+penalty);
+        System.out.println("Nilai penalty terbaik: " + penalty);
     }
 }
