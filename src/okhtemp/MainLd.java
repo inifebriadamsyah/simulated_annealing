@@ -37,16 +37,16 @@ public class MainLd {
     }
 
     public static void executeOptimizer(String dir_stu, String dir_crs, int timeslot, String filename) {
-        CourseSet cs = new CourseSet(dir_crs);
-        ConflictMatrix cm = new ConflictMatrix(dir_stu, cs.getSize());
+        CourseSet courseSet = new CourseSet(dir_crs);
+        ConflictMatrix conflictMatrix = new ConflictMatrix(dir_stu, courseSet.getSize());
 
-        int[][] graph = cm.getRandomMatrix();
+        int[][] graph = conflictMatrix.getRandomMatrix();
         int jumlah_timeslot = timeslot;
 
-        Scheduler scheduler = new Scheduler(cs.getSize());
+        Scheduler scheduler = new Scheduler(courseSet.getSize());
         scheduler.timesloting(graph, jumlah_timeslot);
 
-        scheduler.printSchedule(cm.getRandomIndex(graph.length));
+        scheduler.printSchedule(conflictMatrix.getRandomIndex(graph.length));
         scheduler.exportSchedule(filename);
     }
 

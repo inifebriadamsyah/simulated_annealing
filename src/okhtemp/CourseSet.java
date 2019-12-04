@@ -8,12 +8,12 @@ import java.io.FileReader;
 
 public class CourseSet {
 	Set<String> course;
-	public CourseSet(String fileDir) {
+	public CourseSet(String fileDirectory) {
 		try {
-			FileReader fr = new FileReader(fileDir);
-			BufferedReader br = new BufferedReader(fr);
+			FileReader fileReader = new FileReader(fileDirectory);
+			BufferedReader bufferedReader = new BufferedReader(fileReader);
 			
-			readCourse(br);
+			readCourse(bufferedReader);
 		} catch(Exception e) {}
 	}
 	

@@ -39,7 +39,6 @@ public class Utils {
                 }
             }
         }
-
         return penalty / jumlah;
     }
 

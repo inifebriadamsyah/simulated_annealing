@@ -24,7 +24,6 @@ public class SolverHillClimbing {
             randomIndex[i][0] = index.get(randomNumber);
             index.remove(randomNumber);
         }
-
         return randomIndex;
     }
 
