@@ -4,10 +4,10 @@ import okhtemp.Optimizer;
 
 /**
  *
- * @author Muris Timetabling
+ * @author Muris MainHc
  */
 
-public class Timetabling {
+public class MainHc {
 
     static final String DIREKTORI = "E:/Frequently Used/Edukasi/Kuliah/Semester 7/Optimasi Kombinatorik dan Heuristik/Toronto/";
 
