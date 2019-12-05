@@ -8,14 +8,14 @@ public class MainHc {
 
     public static void main(String[] args) {
         // Direktori file
-        String stud_set = DIREKTORI + "yor-f-83.stu";
-        String crs_set = DIREKTORI + "yor-f-83.crs";
+        String stud_set = DIREKTORI + "car-f-92.stu";
+        String crs_set = DIREKTORI + "car-f-92.crs";
 
         String test_stu = DIREKTORI + "test.stu";
         String test_crs = DIREKTORI + "test.crs";
 
         long startTime = System.nanoTime();
-        Heuristics.hillClimbing(stud_set, crs_set, 100, 100000);
+        Heuristics.hillClimbing(stud_set, crs_set, 100, 1000);
         long endTime = System.nanoTime();
         System.out.println("Runtime: " +(double) (endTime - startTime) / 1000000000);
         int[][] jadwal = Heuristics.getJadwal();
