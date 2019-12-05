@@ -126,7 +126,7 @@ public class MainLd {
                 System.out.println("Total waktu : " + (double) totalTime / 1000000000 + " detik");
                 break;
             case 2:
-                System.out.print("Jumlah Timeslot : ");
+                System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
 //			execute(dir_cars91_stu, dir_cars91_crs, timeslot);
                 long startTime2 = System.nanoTime();
@@ -136,7 +136,7 @@ public class MainLd {
                 System.out.println("Total waktu : " + (double) totalTime2 / 1000000000 + " detik");
                 break;
             case 3:
-                System.out.print("Jumlah Timeslot : ");
+                System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
 //			execute(dir_earf83_stu, dir_earf83_crs, timeslot);
                 long startTime3 = System.nanoTime();
@@ -146,7 +146,7 @@ public class MainLd {
                 System.out.println("Total waktu : " + (double) totalTime3 / 1000000000 + " detik");
                 break;
             case 4:
-                System.out.print("Jumlah Timeslot : ");
+                System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
 //			execute(dir_hecs92_stu, dir_hecs92_crs, timeslot);
                 long startTime4 = System.nanoTime();
@@ -156,7 +156,7 @@ public class MainLd {
                 System.out.println("Total waktu : " + (double) totalTime4 / 1000000000 + " detik");
                 break;
             case 5:
-                System.out.print("Jumlah Timeslot : ");
+                System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
 //			execute(dir_kfus93_stu, dir_kfus93_crs, timeslot);
                 long startTime5 = System.nanoTime();
@@ -166,7 +166,7 @@ public class MainLd {
                 System.out.println("Total waktu : " + (double) totalTime5 / 1000000000 + " detik");
                 break;
             case 6:
-                System.out.print("Jumlah Timeslot : ");
+                System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
 //			execute(dir_lsef91_stu, dir_lsef91_crs, timeslot);
                 long startTime6 = System.nanoTime();
@@ -176,7 +176,7 @@ public class MainLd {
                 System.out.println("Total waktu : " + (double) totalTime6 / 1000000000 + " detik");
                 break;
             case 7:
-                System.out.print("Jumlah Timeslot : ");
+                System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
 //			execute(dir_purs93_stu, dir_purs93_crs, timeslot);
                 long startTime7 = System.nanoTime();
@@ -186,7 +186,7 @@ public class MainLd {
                 System.out.println("Total waktu : " + (double) totalTime7 / 1000000000 + " detik");
                 break;
             case 8:
-                System.out.print("Jumlah Timeslot : ");
+                System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
 //			execute(dir_ryes93_stu, dir_ryes93_crs, timeslot);
                 long startTime8 = System.nanoTime();
@@ -196,7 +196,7 @@ public class MainLd {
                 System.out.println("Total waktu : " + (double) totalTime8 / 1000000000 + " detik");
                 break;
             case 9:
-                System.out.print("Jumlah Timeslot : ");
+                System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
 //			execute(dir_staf83_stu, dir_staf83_crs, timeslot);
                 long startTime9 = System.nanoTime();
@@ -206,7 +206,7 @@ public class MainLd {
                 System.out.println("Total waktu : " + (double) totalTime9 / 1000000000 + " detik");
                 break;
             case 10:
-                System.out.print("Jumlah Timeslot : ");
+                System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
 //			execute(dir_tres92_stu, dir_tres92_crs, timeslot);
                 long startTime10 = System.nanoTime();
@@ -216,7 +216,7 @@ public class MainLd {
                 System.out.println("Total waktu : " + (double) totalTime10 / 1000000000 + " detik");
                 break;
             case 11:
-                System.out.print("Jumlah Timeslot : ");
+                System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
 //			execute(dir_utas92_stu, dir_utas92_crs, timeslot);
                 long startTime11 = System.nanoTime();
@@ -226,7 +226,7 @@ public class MainLd {
                 System.out.println("Total waktu : " + (double) totalTime11 / 1000000000 + " detik");
                 break;
             case 12:
-                System.out.print("Jumlah Timeslot : ");
+                System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
 //			execute(dir_utes92_stu, dir_utes92_crs, timeslot);
                 long startTime12 = System.nanoTime();
@@ -236,7 +236,7 @@ public class MainLd {
                 System.out.println("Total waktu : " + (double) totalTime12 / 1000000000 + " detik");
                 break;
             case 13:
-                System.out.print("Jumlah Timeslot : ");
+                System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
 //			execute(dir_yorf83_stu, dir_yorf83_crs, timeslot);
                 long startTime13 = System.nanoTime();
