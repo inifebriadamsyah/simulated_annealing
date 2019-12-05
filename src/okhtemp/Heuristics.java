@@ -38,13 +38,11 @@ public class Heuristics {
             int[][] copyGraphIter = Utils.copyArray(cmIter.getMatrix());
             int[][] graphIter = conflictMatrix.getRandomMatrix();
 
-            Scheduler schedulerIter = new Scheduler(csIter.getSize());
+            Scheduler schedulerIteration = new Scheduler(csIter.getSize());
 
-            schedulerIter.timesloting(graphIter, jumlahTimeslot);
-            schedulerIter.printSchedule(conflictMatrix.getRandomIndex(graphIter.length));
-            int[][] jadwalIter = schedulerIter.getSchedule();
-
-            //int[][] grIter = cm.getLargestDegree(copyGraphIter);
+            schedulerIteration.timesloting(graphIter, jumlahTimeslot);
+            schedulerIteration.printSchedule(conflictMatrix.getRandomIndex(graphIter.length));
+            int[][] jadwalIter = schedulerIteration.getSchedule();
 
             double penalty2 = Utils.getPenalty(copyGraphIter, jadwalIter, jumlah);
 

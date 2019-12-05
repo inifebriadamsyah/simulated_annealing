@@ -21,13 +21,13 @@ public class CourseSet {
 		return this.course;
 	}
 	
-	public void readCourse(BufferedReader br) {
+	public void readCourse(BufferedReader bufferedReader) {
 		course = new HashSet<String>();
 		String courseLine = null;
 		try {
-			while((courseLine = br.readLine()) != null) {
-				String[] arr = courseLine.split(" ");
-				course.add(arr[0]);
+			while((courseLine = bufferedReader.readLine()) != null) {
+				String[] array = courseLine.split(" ");
+				course.add(array[0]);
 			}			
 		} catch(Exception e) {
 			System.out.println("Error boss");

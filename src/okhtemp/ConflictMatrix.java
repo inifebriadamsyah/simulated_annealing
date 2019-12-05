@@ -104,9 +104,9 @@ public class ConflictMatrix {
     }
     // METHOD BUAT RANDOM SEARCH
 
-    public int getRandomNumber(int min, int max) {
+    public int getRandomNumber(int mini, int maxi) {
         Random randomNumber = new Random();
-        return randomNumber.nextInt(max - min) + min;
+        return randomNumber.nextInt(maxi - mini) + mini;
     }
 
     public int[][] getRandomIndex(int size) {
