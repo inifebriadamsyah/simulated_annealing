@@ -102,7 +102,6 @@ public class ConflictMatrix {
             System.out.println();
         }
     }
-    // METHOD BUAT RANDOM SEARCH
 
     public int getRandomNumber(int mini, int maxi) {
         Random randomNumber = new Random();
