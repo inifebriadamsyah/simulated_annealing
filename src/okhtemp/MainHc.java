@@ -53,7 +53,7 @@ public class MainHc {
 
         int iterasi = 0;
 
-        System.out.println("=== TIMESLOTING === \n");
+        System.out.println("=== OPTIMIZING WITH HILL CLIMBING === \n");
         System.out.println("1. Car-f-92");
         System.out.println("2. Car-s-91");
         System.out.println("3. Ear-f-83");
@@ -67,7 +67,7 @@ public class MainHc {
         System.out.println("11. Uta-s-92");
         System.out.println("12. Ute-s-92");
         System.out.println("13. yor-f-83");
-        System.out.println("99. EXIT");
+        System.out.println("100. EXIT");
 
         System.out.print("\nPilih File : ");
         int input = in.nextInt();
@@ -242,7 +242,7 @@ public class MainHc {
                     System.out.println(hasil_timeslot13[i][0] + " " + hasil_timeslot13[i][1]);
                 }
                 break;
-            case 99:
+            case 100:
                 System.out.println("Exiting....");
                 System.exit(0);
             default:

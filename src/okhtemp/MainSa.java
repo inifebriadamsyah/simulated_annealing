@@ -52,7 +52,7 @@ public class MainSa{
 
         int iterasi = 0;
 
-        System.out.println("=== TIMESLOTING === \n");
+        System.out.println("=== OPTIMIZING WITH SIMULATED ANNEALING === \n");
         System.out.println("1. Car-f-92");
         System.out.println("2. Car-s-91");
         System.out.println("3. Ear-f-83");
@@ -66,7 +66,7 @@ public class MainSa{
         System.out.println("11. Uta-s-92");
         System.out.println("12. Ute-s-92");
         System.out.println("13. yor-f-83");
-        System.out.println("99. EXIT");
+        System.out.println("100. EXIT");
 
         System.out.print("\nPilih File : ");
         int input = in.nextInt();
@@ -189,7 +189,7 @@ public class MainSa{
                 long totalTime13 = endTime13 - startTime13;
                 System.out.println("Total waktu : " + (double) totalTime13 / 1000000000 + " detik");
                 break;
-            case 99:
+            case 100:
                 System.out.println("Bye...");
                 System.exit(0);
             default:

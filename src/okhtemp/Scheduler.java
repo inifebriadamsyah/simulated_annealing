@@ -127,7 +127,7 @@ public class Scheduler {
 
     public void exportSchedule(String filename) {
         try {
-            FileWriter write_solution = new FileWriter("E:/Frequently Used/Edukasi/Kuliah/Semester 7/Optimasi Kombinatorik dan Heuristik/Toronto/ExamTimetableEvaluation/" + filename + ".sol");
+            FileWriter write_solution = new FileWriter("E:/Frequently Used/Edukasi/Kuliah/Semester 7/Optimasi Kombinatorik dan Heuristik/Toronto/" + filename + ".sol");
             write_solution.write(this.getSolusi());
             write_solution.close();
         } catch (Exception e) {

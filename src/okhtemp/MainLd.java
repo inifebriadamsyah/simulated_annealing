@@ -11,27 +11,25 @@ public class MainLd {
     public static void execute(String dir_stu, String dir_crs, int timeslot) {
 
         CourseSet courseSet = new CourseSet(dir_crs);
-        ConflictMatrix conflictMatrix = new ConflictMatrix(dir_stu, courseSet.getSize());
-        int[][] copyGraph = Utils.copyArray(conflictMatrix.getMatrix());
-        int[][] graph = conflictMatrix.getLargestDegree();
         int jumlah_timeslot = timeslot;
-
         long startTime = System.nanoTime();
+        ConflictMatrix conflictMatrix = new ConflictMatrix(dir_stu, courseSet.getSize());
+        int[][] confMat = conflictMatrix.getMatrix();
+        
+        int[][] matrix = conflictMatrix.getLargestDegree();
+        int jumlahSiswa = conflictMatrix.getJumlahStudent();
         Scheduler scheduler = new Scheduler(courseSet.getSize());
-        scheduler.timesloting(graph, jumlah_timeslot);
-
-        long endTime = System.nanoTime();
-        long totalTime = endTime - startTime;
-
+        scheduler.timesloting(matrix, 100);
         scheduler.printSchedule(conflictMatrix.getDegree());
+        int[][] solution = scheduler.getSchedule();
+        
         int student_total = conflictMatrix.getJumlahStudent();
         int[][] schedule = scheduler.getSchedule();
 
-
-
         scheduler.exportSchedule(dir_stu.substring(dir_stu.length() - 12, dir_stu.length() - 4));
-        System.out.println("Penalty : " + Utils.getPenalty(copyGraph, schedule, student_total));
-        System.out.println("Total Eksekusi : " + (double) totalTime / 1000000000 + " detik");
+        long endTime = System.nanoTime();
+        long totalTime = endTime - startTime;
+        System.out.println("Penalty : " + Utils.getPenalty(confMat, solution, student_total));
     }
 
     public static void executeOptimizer(String dir_stu, String dir_crs, int timeslot, String filename) {
@@ -93,7 +91,7 @@ public class MainLd {
 
         int timeslot = 0;
 
-        System.out.println("=== INITIAL SOLUTION === \n");
+        System.out.println("=== OPTIMIZE INITIAL SOLUTION === \n");
         System.out.println("1. Car-f-92");
         System.out.println("2. Car-s-91");
         System.out.println("3. Ear-f-83");
@@ -107,7 +105,7 @@ public class MainLd {
         System.out.println("11. Uta-s-92");
         System.out.println("12. Ute-s-92");
         System.out.println("13. yor-f-83");
-        System.out.println("99. EXIT");
+        System.out.println("100. EXIT");
 
         System.out.print("\nPilih File : ");
         int input = in.nextInt();
@@ -211,7 +209,7 @@ public class MainLd {
                 long totalTime13 = endTime13 - startTime13;
                 System.out.println("Total waktu : " + (double) totalTime13 / 1000000000 + " detik");
                 break;
-            case 99:
+            case 100:
                 System.out.println("Exiting....");
                 System.exit(0);
             default:
