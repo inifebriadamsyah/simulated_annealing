@@ -1,7 +1,7 @@
 package okhtemp;
 
 import java.util.Scanner;
-import okhtemp.Utils;
+import okhtemp.Utility;
 import okhtemp.Heuristics;
 
 public class MainLd {
@@ -12,24 +12,27 @@ public class MainLd {
 
         CourseSet courseSet = new CourseSet(dir_crs);
         int jumlah_timeslot = timeslot;
-        long startTime = System.nanoTime();
+        
         ConflictMatrix conflictMatrix = new ConflictMatrix(dir_stu, courseSet.getSize());
         int[][] confMat = conflictMatrix.getMatrix();
-        
         int[][] matrix = conflictMatrix.getLargestDegree();
         int jumlahSiswa = conflictMatrix.getJumlahStudent();
+        
         Scheduler scheduler = new Scheduler(courseSet.getSize());
         scheduler.timesloting(matrix, 100);
         scheduler.printSchedule(conflictMatrix.getDegree());
-        int[][] solution = scheduler.getSchedule();
         
+        int[][] solution = scheduler.getSchedule();
         int student_total = conflictMatrix.getJumlahStudent();
         int[][] schedule = scheduler.getSchedule();
 
         scheduler.exportSchedule(dir_stu.substring(dir_stu.length() - 12, dir_stu.length() - 4));
-        long endTime = System.nanoTime();
-        long totalTime = endTime - startTime;
-        System.out.println("Penalty : " + Utils.getPenalty(confMat, solution, student_total));
+        System.out.println("Penalty : " + Utility.getPenalty(confMat, solution, student_total));
+        
+        //int[][] hasil_timeslot13 = Heuristics.getJadwal();
+        for (int i = 0; i < schedule.length; i++) {
+            System.out.println(schedule[i][0] + " " + schedule[i][1]);
+        }
     }
 
     public static void executeOptimizer(String dir_stu, String dir_crs, int timeslot, String filename) {

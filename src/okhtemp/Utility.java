@@ -3,7 +3,7 @@ package okhtemp;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Utils {
+public class Utility {
 
     public static int[][] copyArray(int[][] arr) {
         int[][] arrcop = new int[arr.length][arr.length];
