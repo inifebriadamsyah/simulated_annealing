@@ -5,10 +5,10 @@ public class SimulatedAnnealing {
     static int[][] solusiTerbaik;
 
     public static int[][] run2(int[][] matrix, int jumlahSiswa, int[][] solution, double temperature, int iterasi) {
-        int[][] sCurrent = solution;
-        int[][] sBest = Utility.copySolution(sCurrent);
+        int[][] currentSolution = solution;
+        int[][] sBest = Utility.copySolution(currentSolution);
         double reductionFactor = 0.001;
-        double tempCurr = temperature;
+        double currentTemperature = temperature;
 
         for (int i = 0; i < iterasi; i++) {
             int randomLLH = Utility.getRandomNumber(1, 5);
@@ -16,37 +16,37 @@ public class SimulatedAnnealing {
 
             switch (randomLLH) {
                 case 1:
-                    sIterasi = Utility.move(sCurrent.clone(), 1);
+                    sIterasi = Utility.move(currentSolution.clone(), 1);
                     break;
                 case 2:
-                    sIterasi = Utility.swap(sCurrent.clone(), 1);
+                    sIterasi = Utility.swap(currentSolution.clone(), 1);
                     break;
                 case 3:
-                    sIterasi = Utility.move(sCurrent.clone(), 2);
+                    sIterasi = Utility.move(currentSolution.clone(), 2);
                     break;
                 case 4:
-                    sIterasi = Utility.swap(sCurrent.clone(), 3);
+                    sIterasi = Utility.swap(currentSolution.clone(), 3);
                     break;
                 case 5:
-                    sIterasi = Utility.move(sCurrent.clone(), 3);
+                    sIterasi = Utility.move(currentSolution.clone(), 3);
                     break;
                 default:
-                    sIterasi = Utility.swap(sCurrent.clone(), 1);
+                    sIterasi = Utility.swap(currentSolution.clone(), 1);
                     break;
             }
 
-            tempCurr = tempCurr * (1 - reductionFactor);
+            currentTemperature = currentTemperature * (1 - reductionFactor);
 
-            if (Utility.getPenalty(matrix, sIterasi, jumlahSiswa) <= Utility.getPenalty(matrix, sCurrent, jumlahSiswa)) {
-                sCurrent = Utility.copySolution(sIterasi);
+            if (Utility.getPenalty(matrix, sIterasi, jumlahSiswa) <= Utility.getPenalty(matrix, currentSolution, jumlahSiswa)) {
+                currentSolution = Utility.copySolution(sIterasi);
                 if (Utility.getPenalty(matrix, sIterasi, jumlahSiswa) <= Utility.getPenalty(matrix, sBest, jumlahSiswa)) {
                     sBest = Utility.copySolution(sIterasi);
                 }
-            } else if (Math.exp((Utility.getPenalty(matrix, sCurrent, jumlahSiswa) - Utility.getPenalty(matrix, sIterasi, jumlahSiswa)) / tempCurr) > Math.random()) {
-                sCurrent = Utility.copySolution(sIterasi);
+            } else if (Math.exp((Utility.getPenalty(matrix, currentSolution, jumlahSiswa) - Utility.getPenalty(matrix, sIterasi, jumlahSiswa)) / currentTemperature) > Math.random()) {
+                currentSolution = Utility.copySolution(sIterasi);
             }
 
-            System.out.println(i + " " + Utility.getPenalty(matrix, sCurrent, jumlahSiswa));
+            System.out.println(i + " " + Utility.getPenalty(matrix, currentSolution, jumlahSiswa));
         }
 
         return sBest;
@@ -66,7 +66,7 @@ public class SimulatedAnnealing {
         int[][] sCurrent = solution;
         int[][] sBest = Utility.copySolution(sCurrent);
         double reductionFactor = 0.001;
-        double tempCurr = temperature;
+        double currentTemperature = temperature;
 
         for (int i = 0; i < iterasi; i++) {
             int randomLLH = Utility.getRandomNumber(1, 5);
@@ -93,14 +93,14 @@ public class SimulatedAnnealing {
                     break;
             }
 
-            tempCurr = tempCurr * (1 - reductionFactor);
+            currentTemperature = currentTemperature * (1 - reductionFactor);
 
             if (Utility.getPenalty(matrix, sIterasi, jumlahSiswa) <= Utility.getPenalty(matrix, sCurrent, jumlahSiswa)) {
                 sCurrent = Utility.copySolution(sIterasi);
                 if (Utility.getPenalty(matrix, sIterasi, jumlahSiswa) <= Utility.getPenalty(matrix, sBest, jumlahSiswa)) {
                     sBest = Utility.copySolution(sIterasi);
                 }
-            } else if (Math.exp((Utility.getPenalty(matrix, sCurrent, jumlahSiswa) - Utility.getPenalty(matrix, sIterasi, jumlahSiswa)) / tempCurr) > Math.random()) {
+            } else if (Math.exp((Utility.getPenalty(matrix, sCurrent, jumlahSiswa) - Utility.getPenalty(matrix, sIterasi, jumlahSiswa)) / currentTemperature) > Math.random()) {
                 sCurrent = Utility.copySolution(sIterasi);
             }
 

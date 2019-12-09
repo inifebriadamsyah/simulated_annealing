@@ -1,5 +1,6 @@
 package okhtemp;
 
+import java.util.Arrays;
 import java.util.Scanner;
 import okhtemp.Utility;
 import okhtemp.Heuristics;
@@ -32,6 +33,11 @@ public class MainLd {
         for (int i = 0; i < schedule.length; i++) {
             System.out.println(schedule[i][0] + " " + schedule[i][1]);
         }
+        int[] timeslot1 = new int[schedule.length];
+        for (int i = 0; i < schedule.length; i++) {
+            timeslot1[i] = schedule[i][1];
+        }
+        System.out.print("Timeslot dibutuhkan: " + Arrays.stream(timeslot1).max().getAsInt() + "\n");
     }
 
     public static void executeOptimizer(String dir_stu, String dir_crs, int timeslot, String filename) {
@@ -217,7 +223,6 @@ public class MainLd {
             default:
                 System.exit(0);
         }
-
         in.close();
     }
 }
