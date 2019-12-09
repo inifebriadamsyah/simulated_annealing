@@ -122,8 +122,6 @@ public class Scheduler {
                 schedule[i][0] = degree[i][0];
                 schedule[i][1] = timeslot[i];
             }
-//            System.out.println();
-//            System.out.println("Jumlah Timeslot minimum : " + Arrays.stream(timeslot).max().getAsInt());
         }
     }
 

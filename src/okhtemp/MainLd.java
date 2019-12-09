@@ -16,20 +16,18 @@ public class MainLd {
         int[][] graph = conflictMatrix.getLargestDegree();
         int jumlah_timeslot = timeslot;
 
-        // Start
         long startTime = System.nanoTime();
         Scheduler scheduler = new Scheduler(courseSet.getSize());
         scheduler.timesloting(graph, jumlah_timeslot);
 
         long endTime = System.nanoTime();
         long totalTime = endTime - startTime;
-		// End
 
         scheduler.printSchedule(conflictMatrix.getDegree());
         int student_total = conflictMatrix.getJumlahStudent();
         int[][] schedule = scheduler.getSchedule();
 
-        //int[][] gr = cm.getLargestDegree(copyGraph);
+
 
         scheduler.exportSchedule(dir_stu.substring(dir_stu.length() - 12, dir_stu.length() - 4));
         System.out.println("Penalty : " + Utils.getPenalty(copyGraph, schedule, student_total));

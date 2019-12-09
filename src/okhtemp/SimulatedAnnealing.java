@@ -53,14 +53,14 @@ public class SimulatedAnnealing {
     }
 
     public static void run(String dir_stu, String dir_crs, double temperature, int iterasi) {
-        CourseSet cs = new CourseSet(dir_crs);
-        ConflictMatrix cm = new ConflictMatrix(dir_stu, cs.getSize());
+        CourseSet courseSet = new CourseSet(dir_crs);
+        ConflictMatrix conflictMatrix = new ConflictMatrix(dir_stu, courseSet.getSize());
 
-        int[][] matrix = cm.getLargestDegree();
-        int jumlahSiswa = cm.getJumlahStudent();
-        Scheduler scheduler = new Scheduler(cs.getSize());
+        int[][] matrix = conflictMatrix.getLargestDegree();
+        int jumlahSiswa = conflictMatrix.getJumlahStudent();
+        Scheduler scheduler = new Scheduler(courseSet.getSize());
         scheduler.timesloting(matrix, 100);
-        scheduler.printSchedule(cm.getDegree());
+        scheduler.printSchedule(conflictMatrix.getDegree());
         int[][] solution = scheduler.getSchedule();
 
         int[][] sCurrent = solution;
@@ -106,9 +106,7 @@ public class SimulatedAnnealing {
 
             System.out.println(i + " " + Utils.getPenalty(matrix, sCurrent, jumlahSiswa));
         }
-
         System.out.println("Fitness Terbaik : " + Utils.getPenalty(matrix, sBest, jumlahSiswa));
-
         solusiTerbaik = sBest;
     }
 }
