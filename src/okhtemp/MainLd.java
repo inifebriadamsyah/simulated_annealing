@@ -28,8 +28,7 @@ public class MainLd {
 
         scheduler.exportSchedule(dir_stu.substring(dir_stu.length() - 12, dir_stu.length() - 4));
         System.out.println("Penalty : " + Utility.getPenalty(confMat, solution, student_total));
-        
-        //int[][] hasil_timeslot13 = Heuristics.getJadwal();
+
         for (int i = 0; i < schedule.length; i++) {
             System.out.println(schedule[i][0] + " " + schedule[i][1]);
         }
