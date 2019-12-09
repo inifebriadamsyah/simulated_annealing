@@ -1,5 +1,7 @@
 package okhtemp;
 
+import java.util.Arrays;
+
 public class SimulatedAnnealing {
 
     static int[][] solusiTerbaik;
@@ -106,6 +108,17 @@ public class SimulatedAnnealing {
 
             System.out.println(i + " " + Utility.getPenalty(matrix, currentSolution, jumlahSiswa));
         }
+        
+        for (int i = 0; i < solution.length; i++) {
+            System.out.println(solution[i][0] + " " + solution[i][1]);
+        }
+        int[] timeslotTempLd = new int[solution.length];
+        for (int i = 0; i < solution.length; i++) {
+            timeslotTempLd[i] = solution[i][1];
+        }
+        System.out.print("Timeslot dibutuhkan: " + Arrays.stream(timeslotTempLd).max().getAsInt() + "\n");
+        
+        
         System.out.println("Fitness Terbaik : " + Utility.getPenalty(matrix, bestSolution, jumlahSiswa));
         solusiTerbaik = bestSolution;
     }
