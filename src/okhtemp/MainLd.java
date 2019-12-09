@@ -33,11 +33,11 @@ public class MainLd {
         for (int i = 0; i < schedule.length; i++) {
             System.out.println(schedule[i][0] + " " + schedule[i][1]);
         }
-        int[] timeslot1 = new int[schedule.length];
+        int[] timeslotTempLd = new int[schedule.length];
         for (int i = 0; i < schedule.length; i++) {
-            timeslot1[i] = schedule[i][1];
+            timeslotTempLd[i] = schedule[i][1];
         }
-        System.out.print("Timeslot dibutuhkan: " + Arrays.stream(timeslot1).max().getAsInt() + "\n");
+        System.out.print("Timeslot dibutuhkan: " + Arrays.stream(timeslotTempLd).max().getAsInt() + "\n");
     }
 
     public static void executeOptimizer(String dir_stu, String dir_crs, int timeslot, String filename) {
@@ -55,7 +55,7 @@ public class MainLd {
     }
 
     public static void main(String[] args) {
-        // Direktori file
+        
         String dir_carf92_stu = DIREKTORI + "car-f-92.stu";
         String dir_carf92_crs = DIREKTORI + "car-f-92.crs";
 
