@@ -130,11 +130,11 @@ public class MainHc {
                     System.out.println(hasil_timeslot3[i][0] + " " + hasil_timeslot3[i][1]);
                 }
                 
-                int[] timeslotTempLd03 = new int[hasil_timeslot3.length];
+                int[] timeslotTempLd3 = new int[hasil_timeslot3.length];
                 for (int i = 0; i < hasil_timeslot3.length; i++) {
-                    timeslotTempLd03[i] = hasil_timeslot3[i][1];
+                    timeslotTempLd3[i] = hasil_timeslot3[i][1];
                 }
-                System.out.print("Timeslot dibutuhkan: " + Arrays.stream(timeslotTempLd03).max().getAsInt() + "\n");
+                System.out.print("Timeslot dibutuhkan: " + Arrays.stream(timeslotTempLd3).max().getAsInt() + "\n");
                 break;
                 
             case 4:

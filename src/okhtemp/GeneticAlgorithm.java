@@ -100,6 +100,7 @@ public class GeneticAlgorithm {
             solution1.setPenalty(Utility.getPenalty(conflict_matrix, solution1.getSolution(), jumlahStudent));
             solution2.setPenalty(Utility.getPenalty(conflict_matrix, solution2.getSolution(), jumlahStudent));
 
+            
             System.out.println("Solution 1 : \n\t" + solution1.getPenalty() + "\n\t" + solution1.getJumlahTimeslot());
             System.out.println("Solution 2 : \n\t" + solution2.getPenalty() + "\n\t" + solution2.getJumlahTimeslot());
 
@@ -119,7 +120,7 @@ public class GeneticAlgorithm {
             } else if (solution2.getPenalty() < solution1.getPenalty() && solution2.getPenalty() < bestSolution.getPenalty()) {
                 bestSolution = solution2;
             }
-
+            
             population = generatePopulation(courseSet, conflictMatrix, populationSize);
 
             iter--;

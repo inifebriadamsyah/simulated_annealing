@@ -118,7 +118,6 @@ public class SimulatedAnnealing {
         }
         System.out.print("Timeslot dibutuhkan: " + Arrays.stream(timeslotTempLd).max().getAsInt() + "\n");
         
-        
         System.out.println("Fitness Terbaik : " + Utility.getPenalty(matrix, bestSolution, jumlahSiswa));
         solusiTerbaik = bestSolution;
     }
