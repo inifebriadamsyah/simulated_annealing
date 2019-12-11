@@ -1,5 +1,6 @@
 package okhtemp;
 
+import java.io.FileWriter;
 import java.util.ArrayList;
 
 public class GeneticAlgorithm {
@@ -99,7 +100,6 @@ public class GeneticAlgorithm {
             solution2 = solRecombination.get(1);
             solution1.setPenalty(Utility.getPenalty(conflict_matrix, solution1.getSolution(), jumlahStudent));
             solution2.setPenalty(Utility.getPenalty(conflict_matrix, solution2.getSolution(), jumlahStudent));
-
             
             System.out.println("Solution 1 : \n\t" + solution1.getPenalty() + "\n\t" + solution1.getJumlahTimeslot());
             System.out.println("Solution 2 : \n\t" + solution2.getPenalty() + "\n\t" + solution2.getJumlahTimeslot());
