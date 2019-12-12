@@ -4,74 +4,81 @@ import java.util.Arrays;
 
 public class SimulatedAnnealing {
 
-    static int[][] solusiTerbaik;
+    private static int[][] solusiTerbaik;
+
+    public static int[][] getSolusi() {
+        return solusiTerbaik;
+    }
 
     public static void run(String dir_stu, String dir_crs, double temperature, int iterasi) {
         CourseSet courseSet = new CourseSet(dir_crs);
-        ConflictMatrix conflictMatrix = new ConflictMatrix(dir_stu, courseSet.getSize());
+        ConflictMatrix cm = new ConflictMatrix(dir_stu, courseSet.getSize());
 
-        int[][] matrix = conflictMatrix.getLargestDegree();
-        int jumlahSiswa = conflictMatrix.getJumlahStudent();
-        Scheduler scheduler = new Scheduler(courseSet.getSize());
-        scheduler.timesloting(matrix, 100);
-        scheduler.printSchedule(conflictMatrix.getDegree());
-        int[][] solution = scheduler.getSchedule();
+        int[][] confMat = cm.getMatrix();
+        int jumlahSiswa = cm.getJumlahStudent();
+        int[][] solution = SchedulerFunctions.getSaturationSchedule(courseSet.getSize(), cm.getDegree(), confMat);
 
-        int[][] currentSolution = solution;
-        int[][] bestSolution = RandomFunction.copySolution(currentSolution);
+        Solution bestSolution = new Solution(solution);
+
+        int[][] sCurrent = RandomFunctions.copySolution(solution);
+        int[][] sBest = RandomFunctions.copySolution(sCurrent);
         double reductionFactor = 0.001;
-        double currentTemperature = temperature;
+        double tempCurr = temperature;
 
         for (int i = 0; i < iterasi; i++) {
-            int randomizerPembanding = RandomFunction.getRandomNumber(1, 5);
-            int[][] cIteration;
+            int randomLLH = RandomFunctions.getRandomNumber(1, 5);
+            int[][] sIterasi;
 
-            switch (randomizerPembanding) {
+            switch (randomLLH) {
                 case 1:
-                    cIteration = RandomFunction.move(currentSolution.clone(), 1);
+                    sIterasi = RandomFunctions.move(RandomFunctions.copySolution(sCurrent), 1);
                     break;
                 case 2:
-                    cIteration = RandomFunction.swap(currentSolution.clone(), 1);
+                    sIterasi = RandomFunctions.swap(RandomFunctions.copySolution(sCurrent), 1);
                     break;
                 case 3:
-                    cIteration = RandomFunction.move(currentSolution.clone(), 2);
+                    sIterasi = RandomFunctions.move(RandomFunctions.copySolution(sCurrent), 2);
                     break;
                 case 4:
-                    cIteration = RandomFunction.swap(currentSolution.clone(), 3);
+                    sIterasi = RandomFunctions.swap(RandomFunctions.copySolution(sCurrent), 3);
                     break;
                 case 5:
-                    cIteration = RandomFunction.move(currentSolution.clone(), 3);
+                    sIterasi = RandomFunctions.move(RandomFunctions.copySolution(sCurrent), 3);
                     break;
                 default:
-                    cIteration = RandomFunction.swap(currentSolution.clone(), 1);
+                    sIterasi = RandomFunctions.swap(RandomFunctions.copySolution(sCurrent), 1);
                     break;
             }
 
-            currentTemperature = currentTemperature * (1 - reductionFactor);
-            
-
-            if (RandomFunction.getPenalty(matrix, cIteration, jumlahSiswa) <= RandomFunction.getPenalty(matrix, currentSolution, jumlahSiswa)) {
-                currentSolution = RandomFunction.copySolution(cIteration);
-                if (RandomFunction.getPenalty(matrix, cIteration, jumlahSiswa) <= RandomFunction.getPenalty(matrix, bestSolution, jumlahSiswa)) {
-                    bestSolution = RandomFunction.copySolution(cIteration);
+            tempCurr = tempCurr * (1 - reductionFactor);
+            if (RandomFunctions.isNotTabrakan(confMat, sIterasi)) {
+                if (RandomFunctions.getPenalty(confMat, sIterasi, jumlahSiswa) <= RandomFunctions.getPenalty(confMat, sCurrent, jumlahSiswa)) {
+                    sCurrent = RandomFunctions.copySolution(sIterasi);
+                    if (RandomFunctions.getPenalty(confMat, sIterasi, jumlahSiswa) <= RandomFunctions.getPenalty(confMat, sBest, jumlahSiswa)) {
+                        sBest = RandomFunctions.copySolution(sIterasi);
+                        bestSolution.setSolution(sBest);
+                        bestSolution.setPenalty(RandomFunctions.getPenalty(confMat, sIterasi, jumlahSiswa));
+                    }
+                } else if (Math.exp((RandomFunctions.getPenalty(confMat, sCurrent, jumlahSiswa) - RandomFunctions.getPenalty(confMat, sIterasi, jumlahSiswa)) / tempCurr) > Math.random()) {
+                    sCurrent = RandomFunctions.copySolution(sIterasi);
                 }
-            } else if (Math.exp((RandomFunction.getPenalty(matrix, currentSolution, jumlahSiswa) - RandomFunction.getPenalty(matrix, cIteration, jumlahSiswa)) / currentTemperature) > Math.random()) {
-                currentSolution = RandomFunction.copySolution(cIteration);
             }
 
-            System.out.println(i + " " + RandomFunction.getPenalty(matrix, currentSolution, jumlahSiswa));
+            if ((i + 1) % 10 == 0) {
+                System.out.println("Iterasi ke-" + (i + 1) + " " + RandomFunctions.getPenalty(confMat, sCurrent, jumlahSiswa));
+            }
+
         }
-        
-        for (int i = 0; i < solution.length; i++) {
-            System.out.println(solution[i][0] + " " + solution[i][1]);
+        System.out.println();
+        System.out.println("Penalty initial solution : " + RandomFunctions.getPenalty(confMat, RandomFunctions.getSaturationSchedule(courseSet.getSize(), cm.getDegree(), confMat), jumlahSiswa));
+        System.out.println("Penalty Terbaik : " + bestSolution.getPenalty());
+        System.out.println("Jumlah timeslot : " + bestSolution.getJumlahTimeslot());
+        int[][] bbest = bestSolution.getSolution();
+//		
+        for (int i = 0; i < bbest.length; i++) {
+            System.out.println(bbest[i][0] + " " + bbest[i][1]);
         }
-        int[] timeslotTempSa = new int[solution.length];
-        for (int i = 0; i < solution.length; i++) {
-            timeslotTempSa[i] = solution[i][1];
-        }
-        System.out.print("Timeslot dibutuhkan: " + Arrays.stream(timeslotTempSa).max().getAsInt() + "\n");
-        
-        System.out.println("Fitness Terbaik : " + RandomFunction.getPenalty(matrix, bestSolution, jumlahSiswa));
-        solusiTerbaik = bestSolution;
+
+        solusiTerbaik = sBest;
     }
 }

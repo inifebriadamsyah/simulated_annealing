@@ -2,7 +2,7 @@ package okhtemp;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import okhtemp.RandomFunction;
+import okhtemp.RandomFunctions;
 import okhtemp.Heuristics;
 
 public class MainLd {
@@ -17,25 +17,24 @@ public class MainLd {
         ConflictMatrix conflictMatrix = new ConflictMatrix(dir_stu, courseSet.getSize());
         int[][] matrixInitial = conflictMatrix.getMatrix();
         int[][] matrixLargestDegree = conflictMatrix.getLargestDegree();
+        int[][] largestDegree = conflictMatrix.getDegree();
         int jumlahSiswa = conflictMatrix.getJumlahStudent();
               
-        Scheduler scheduler = new Scheduler(courseSet.getSize());
+        SchedulerFunctions scheduler = new SchedulerFunctions(courseSet.getSize());
         scheduler.timesloting(matrixLargestDegree, 100);
         scheduler.printSchedule(conflictMatrix.getDegree());
         
-        int[][] solution = scheduler.getSchedule();
-        int student_total = conflictMatrix.getJumlahStudent();
-        int[][] schedule = scheduler.getSchedule();
+        int[][] solution = RandomFunctions.getSaturationSchedule(courseSet.getSize(), largestDegree, matrixInitial);
 
         scheduler.exportSchedule(dir_stu.substring(dir_stu.length() - 12, dir_stu.length() - 4));
-        System.out.println("Penalty : " + RandomFunction.getPenalty(matrixInitial, solution, student_total));
+        System.out.println("Penalty : " + RandomFunctions.getPenalty(matrixInitial, solution, jumlahSiswa));
 
-        for (int i = 0; i < schedule.length; i++) {
-            System.out.println(schedule[i][0] + " " + schedule[i][1]);
+        for (int i = 0; i < solution.length; i++) {
+            System.out.println(solution[i][0] + " " + solution[i][1]);
         }
-        int[] timeslotTempLd = new int[schedule.length];
-        for (int i = 0; i < schedule.length; i++) {
-            timeslotTempLd[i] = schedule[i][1];
+        int[] timeslotTempLd = new int[solution.length];
+        for (int i = 0; i < solution.length; i++) {
+            timeslotTempLd[i] = solution[i][1];
         }
         System.out.print("Timeslot dibutuhkan: " + Arrays.stream(timeslotTempLd).max().getAsInt() + "\n");
     }
@@ -47,7 +46,7 @@ public class MainLd {
         int[][] graph = conflictMatrix.getRandomMatrix();
         int jumlah_timeslot = timeslot;
 
-        Scheduler scheduler = new Scheduler(courseSet.getSize());
+        SchedulerFunctions scheduler = new SchedulerFunctions(courseSet.getSize());
         scheduler.timesloting(graph, jumlah_timeslot);
 
         scheduler.printSchedule(conflictMatrix.getRandomIndex(graph.length));

@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -53,7 +52,8 @@ public class ConflictMatrix {
                 }
             }
 
-        } catch (Exception e) {   }
+        } catch (Exception e) {
+        }
     }
 
     public static void sortingDegree(int array[][], int collumn) {
@@ -80,6 +80,19 @@ public class ConflictMatrix {
         sortingDegree(courseDegree, 1);
 
         return courseDegree;
+    }
+
+    public int[][] getLargestDegree(int[][] arr) {
+        int[][] temp = arr;
+        int[][] courseDegree = this.getDegree();
+        int[][] largestDegree = new int[temp.length][temp.length];
+        for (int i = 0; i < temp.length; i++) {
+            for (int j = 0; j < temp.length; j++) {
+                largestDegree[i][j] = temp[courseDegree[i][0] - 1][courseDegree[j][0] - 1];
+            }
+        }
+
+        return largestDegree;
     }
 
     public int[][] getLargestDegree() {
@@ -135,16 +148,16 @@ public class ConflictMatrix {
         }
         return randomMatrix;
     }
-    
-    public int[][] saturationDegree(){
-        int[][] matrixLDTemporary = getLargestDegree();
-        int[][] randomIndex = this.getRandomIndex(matrixLDTemporary.length);
-        int[][] randomMatrix = new int[matrixLDTemporary.length][matrixLDTemporary.length];
-        for (int i = 0; i < matrixLDTemporary.length; i++) {
-            for (int j = 0; j < matrixLDTemporary.length; j++) {
-                randomMatrix[i][j] = matrixLDTemporary[randomIndex[i][0] - 1][randomIndex[j][0] - 1];
+
+    public int[][] getRandomMatrix(int[][] randomIndex) {
+        int[][] temp = getMatrix();
+
+        int[][] randomMatrix = new int[temp.length][temp.length];
+        for (int i = 0; i < temp.length; i++) {
+            for (int j = 0; j < temp.length; j++) {
+                randomMatrix[i][j] = temp[randomIndex[i][0] - 1][randomIndex[j][0] - 1];
             }
-        } 
-        return matrixLDTemporary;
+        }
+        return randomMatrix;
     }
 }

@@ -9,14 +9,15 @@ public class GeneticAlgorithm {
         int[][] sol1 = s1.getSolution();
         int[][] sol2 = s2.getSolution();
 
-        int n = sol1.length / 2;
+//		int n = sol1.length/2;
+        int n = 1;
 
-        int[][] temporary1 = RandomFunction.copySolution(sol1);
-        int[][] temporary2 = RandomFunction.copySolution(sol2);
+        int[][] temp1 = RandomFunctions.copySolution(sol1);
+        int[][] temp2 = RandomFunctions.copySolution(sol2);
 
         for (int i = 0; i < n; i++) {
-            sol1[i][1] = temporary2[temporary2.length - n + i][1];
-            sol2[temporary2.length - n + i][1] = temporary1[i][1];
+            sol1[i][1] = temp2[temp2.length - n + i][1];
+            sol2[temp2.length - n + i][1] = temp1[i][1];
         }
 
         Solution solution1 = new Solution(sol1);
@@ -32,39 +33,41 @@ public class GeneticAlgorithm {
     private static Solution mutation(Solution solution) {
         int[][] arrSol = solution.getSolution();
 
-        int step = 100;
+        int step = 1;
 
         for (int i = 0; i < step; i++) {
-            int randomExam = RandomFunction.getRandomNumber(1, arrSol.length - 1);
-            int randomTimeslot = RandomFunction.getRandomNumber(1, solution.getJumlahTimeslot());
+            int randomExam = RandomFunctions.getRandomNumber(1, arrSol.length - 1);
+            int randomTimeslot = RandomFunctions.getRandomNumber(1, solution.getJumlahTimeslot());
 
             arrSol[randomExam][1] = randomTimeslot;
         }
+
         Solution mutationSolution = new Solution(arrSol);
+
         return mutationSolution;
     }
 
     private static ArrayList<Solution> generatePopulation(CourseSet cs, ConflictMatrix cm, int populationSize) {
         int jumlahStudent = cm.getJumlahStudent();
-        int[][] conflict_matrix = cm.getMatrix();
-
         ArrayList<Solution> population = new ArrayList<Solution>();
 
         for (int i = 0; i < populationSize; i++) {
 //			int[][] index = cm.getRandomIndex(cs.getSize());
 //			int[][] matrix = cm.getRandomMatrix(index);	
             int[][] matrix = cm.getLargestDegree();
+            int[][] confMat = cm.getMatrix();
 
-            Scheduler scheduler = new Scheduler(cs.getSize());
+            SchedulerFunctions scheduler = new SchedulerFunctions(cs.getSize());
             scheduler.timesloting(matrix, 100);
 //			scheduler.printSchedule(index);
             scheduler.printSchedule(cm.getDegree());
-            int[][] solution = scheduler.getSchedule();
+//			int[][] solution = scheduler.getSchedule();
+            int[][] solution = RandomFunctions.getSaturationSchedule(cs.getSize(), cm.getDegree(), confMat);
 
             Solution s = new Solution(solution);
             population.add(s);
 
-            double penalty = RandomFunction.getPenalty(conflict_matrix, solution, jumlahStudent);
+            double penalty = RandomFunctions.getPenalty(confMat, solution, jumlahStudent);
             s.setPenalty(penalty);
         }
 
@@ -72,24 +75,23 @@ public class GeneticAlgorithm {
     }
 
     public static void run(String dir_stu, String dir_crs, int populationSize, int iterasi) {
-        CourseSet courseSet = new CourseSet(dir_crs);
-        ConflictMatrix conflictMatrix = new ConflictMatrix(dir_stu, courseSet.getSize());
+        CourseSet cs = new CourseSet(dir_crs);
+        ConflictMatrix cm = new ConflictMatrix(dir_stu, cs.getSize());
 
-        int jumlahStudent = conflictMatrix.getJumlahStudent();
-        int[][] conflict_matrix = conflictMatrix.getMatrix();
+        int jumlahStudent = cm.getJumlahStudent();
+        int[][] conflictMatrix = cm.getMatrix();
 
-        ArrayList<Solution> population = generatePopulation(courseSet, conflictMatrix, populationSize);
+        ArrayList<Solution> population = generatePopulation(cs, cm, populationSize);
 
-        int iter = iterasi;
+        int iter = 0;
 
-        Solution bestSolution = new Solution(courseSet.getSize());
-        bestSolution.setPenalty(Integer.MAX_VALUE);
+        Solution bestSolution = new Solution(cs.getSize());
 
-        while (iter > 0) {
+        bestSolution.setSolution(RandomFunctions.copySolution(population.get(0).getSolution()));
+        bestSolution.setPenalty(RandomFunctions.getPenalty(conflictMatrix, bestSolution.getSolution(), jumlahStudent));
+
+        while (iter < iterasi) {
             population.sort((o1, o2) -> o1.getPenalty().compareTo(o2.getPenalty()));
-
-            System.out.println("Best fit solution : \n\t" + population.get(0).getPenalty() + "\n\t" + population.get(0).getJumlahTimeslot());
-            System.out.println("2nd best fit solution : \n\t" + population.get(1).getPenalty() + "\n\t" + population.get(1).getJumlahTimeslot());
 
             // Recombination
             Solution solution1 = population.get(0);
@@ -98,35 +100,73 @@ public class GeneticAlgorithm {
             ArrayList<Solution> solRecombination = recombination(solution1, solution2);
             solution1 = solRecombination.get(0);
             solution2 = solRecombination.get(1);
-            solution1.setPenalty(RandomFunction.getPenalty(conflict_matrix, solution1.getSolution(), jumlahStudent));
-            solution2.setPenalty(RandomFunction.getPenalty(conflict_matrix, solution2.getSolution(), jumlahStudent));
-            
-            System.out.println("Solution 1 : \n\t" + solution1.getPenalty() + "\n\t" + solution1.getJumlahTimeslot());
-            System.out.println("Solution 2 : \n\t" + solution2.getPenalty() + "\n\t" + solution2.getJumlahTimeslot());
+
+            if (RandomFunctions.isNotTabrakan(conflictMatrix, solution1.getSolution())) {
+                solution1.setPenalty(RandomFunctions.getPenalty(conflictMatrix, solution1.getSolution(), jumlahStudent));
+            } else {
+                solution1.setPenalty(1000);
+            }
+
+            if (RandomFunctions.isNotTabrakan(conflictMatrix, solution2.getSolution())) {
+                solution2.setPenalty(RandomFunctions.getPenalty(conflictMatrix, solution2.getSolution(), jumlahStudent));
+            } else {
+                solution2.setPenalty(1000);
+            }
 
             // Mutation
             solution1 = mutation(solution1);
             solution2 = mutation(solution2);
 
-            solution1.setPenalty(RandomFunction.getPenalty(conflict_matrix, solution1.getSolution(), jumlahStudent));
-            solution2.setPenalty(RandomFunction.getPenalty(conflict_matrix, solution2.getSolution(), jumlahStudent));
-
-            System.out.println();
-            System.out.println("Solution 1 : \n\t" + solution1.getPenalty() + "\n\t" + solution1.getJumlahTimeslot());
-            System.out.println("Solution 2 : \n\t" + solution2.getPenalty() + "\n\t" + solution2.getJumlahTimeslot());
-
-            if (solution1.getPenalty() < solution2.getPenalty() && solution1.getPenalty() < bestSolution.getPenalty()) {
-                bestSolution = solution1;
-            } else if (solution2.getPenalty() < solution1.getPenalty() && solution2.getPenalty() < bestSolution.getPenalty()) {
-                bestSolution = solution2;
+            if (RandomFunctions.isNotTabrakan(conflictMatrix, solution1.getSolution())) {
+                solution1.setPenalty(RandomFunctions.getPenalty(conflictMatrix, solution1.getSolution(), jumlahStudent));
+            } else {
+                solution1.setPenalty(1000);
             }
-            
-            population = generatePopulation(courseSet, conflictMatrix, populationSize);
 
-            iter--;
+            if (RandomFunctions.isNotTabrakan(conflictMatrix, solution2.getSolution())) {
+                solution2.setPenalty(RandomFunctions.getPenalty(conflictMatrix, solution2.getSolution(), jumlahStudent));
+            } else {
+                solution2.setPenalty(1000);
+            }
+
+            if (RandomFunctions.isNotTabrakan(conflictMatrix, solution1.getSolution()) && RandomFunctions.isNotTabrakan(conflictMatrix, solution2.getSolution())) {
+                if (solution1.getPenalty() < solution2.getPenalty() && solution1.getPenalty() < bestSolution.getPenalty()) {
+                    bestSolution = solution1;
+                } else if (solution2.getPenalty() < solution1.getPenalty() && solution2.getPenalty() < bestSolution.getPenalty()) {
+                    bestSolution = solution2;
+                }
+            }
+
+            if (RandomFunctions.isNotTabrakan(conflictMatrix, solution1.getSolution()) && RandomFunctions.isNotTabrakan(conflictMatrix, solution2.getSolution())) {
+                if ((iter + 1) % 10 == 0) {
+                    if (solution1.getPenalty() < solution2.getPenalty()) {
+                        System.out.println("Iterasi ke-" + (iter + 1) + " " + solution1.getPenalty());
+                    } else {
+                        System.out.println("Iterasi ke-" + (iter + 1) + " " + solution2.getPenalty());
+                    }
+                }
+            } else {
+                if ((iter + 1) % 10 == 0) {
+                    System.out.println("Iterasi ke-" + (iter + 1) + " " + bestSolution.getPenalty());
+                }
+            }
+
+            population = generatePopulation(cs, cm, populationSize);
+
+            iter++;
 
         }
 
-        System.out.println("Best solution : " + bestSolution.getPenalty() + " " + bestSolution.getJumlahTimeslot());
+        System.out.println();
+        System.out.println("Best solution : " + bestSolution.getPenalty());
+        System.out.println("Jumlah timeslot : " + bestSolution.getJumlahTimeslot());
+//		
+        int[][] bbest = bestSolution.getSolution();
+//		
+        for (int i = 0; i < bbest.length; i++) {
+            System.out.println(bbest[i][0] + " " + bbest[i][1]);
+        }
+
     }
+
 }
