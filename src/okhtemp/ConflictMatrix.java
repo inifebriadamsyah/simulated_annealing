@@ -135,4 +135,16 @@ public class ConflictMatrix {
         }
         return randomMatrix;
     }
+    
+    public int[][] saturationDegree(){
+        int[][] matrixLDTemporary = getLargestDegree();
+        int[][] randomIndex = this.getRandomIndex(matrixLDTemporary.length);
+        int[][] randomMatrix = new int[matrixLDTemporary.length][matrixLDTemporary.length];
+        for (int i = 0; i < matrixLDTemporary.length; i++) {
+            for (int j = 0; j < matrixLDTemporary.length; j++) {
+                randomMatrix[i][j] = matrixLDTemporary[randomIndex[i][0] - 1][randomIndex[j][0] - 1];
+            }
+        } 
+        return matrixLDTemporary;
+    }
 }

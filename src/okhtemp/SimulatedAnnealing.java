@@ -48,6 +48,7 @@ public class SimulatedAnnealing {
             }
 
             currentTemperature = currentTemperature * (1 - reductionFactor);
+            
 
             if (RandomFunction.getPenalty(matrix, cIteration, jumlahSiswa) <= RandomFunction.getPenalty(matrix, currentSolution, jumlahSiswa)) {
                 currentSolution = RandomFunction.copySolution(cIteration);
