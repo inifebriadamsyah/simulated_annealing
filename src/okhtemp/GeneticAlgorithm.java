@@ -11,8 +11,8 @@ public class GeneticAlgorithm {
 
         int n = sol1.length / 2;
 
-        int[][] temporary1 = Utility.copySolution(sol1);
-        int[][] temporary2 = Utility.copySolution(sol2);
+        int[][] temporary1 = RandomFunction.copySolution(sol1);
+        int[][] temporary2 = RandomFunction.copySolution(sol2);
 
         for (int i = 0; i < n; i++) {
             sol1[i][1] = temporary2[temporary2.length - n + i][1];
@@ -35,8 +35,8 @@ public class GeneticAlgorithm {
         int step = 100;
 
         for (int i = 0; i < step; i++) {
-            int randomExam = Utility.getRandomNumber(1, arrSol.length - 1);
-            int randomTimeslot = Utility.getRandomNumber(1, solution.getJumlahTimeslot());
+            int randomExam = RandomFunction.getRandomNumber(1, arrSol.length - 1);
+            int randomTimeslot = RandomFunction.getRandomNumber(1, solution.getJumlahTimeslot());
 
             arrSol[randomExam][1] = randomTimeslot;
         }
@@ -64,7 +64,7 @@ public class GeneticAlgorithm {
             Solution s = new Solution(solution);
             population.add(s);
 
-            double penalty = Utility.getPenalty(conflict_matrix, solution, jumlahStudent);
+            double penalty = RandomFunction.getPenalty(conflict_matrix, solution, jumlahStudent);
             s.setPenalty(penalty);
         }
 
@@ -98,8 +98,8 @@ public class GeneticAlgorithm {
             ArrayList<Solution> solRecombination = recombination(solution1, solution2);
             solution1 = solRecombination.get(0);
             solution2 = solRecombination.get(1);
-            solution1.setPenalty(Utility.getPenalty(conflict_matrix, solution1.getSolution(), jumlahStudent));
-            solution2.setPenalty(Utility.getPenalty(conflict_matrix, solution2.getSolution(), jumlahStudent));
+            solution1.setPenalty(RandomFunction.getPenalty(conflict_matrix, solution1.getSolution(), jumlahStudent));
+            solution2.setPenalty(RandomFunction.getPenalty(conflict_matrix, solution2.getSolution(), jumlahStudent));
             
             System.out.println("Solution 1 : \n\t" + solution1.getPenalty() + "\n\t" + solution1.getJumlahTimeslot());
             System.out.println("Solution 2 : \n\t" + solution2.getPenalty() + "\n\t" + solution2.getJumlahTimeslot());
@@ -108,8 +108,8 @@ public class GeneticAlgorithm {
             solution1 = mutation(solution1);
             solution2 = mutation(solution2);
 
-            solution1.setPenalty(Utility.getPenalty(conflict_matrix, solution1.getSolution(), jumlahStudent));
-            solution2.setPenalty(Utility.getPenalty(conflict_matrix, solution2.getSolution(), jumlahStudent));
+            solution1.setPenalty(RandomFunction.getPenalty(conflict_matrix, solution1.getSolution(), jumlahStudent));
+            solution2.setPenalty(RandomFunction.getPenalty(conflict_matrix, solution2.getSolution(), jumlahStudent));
 
             System.out.println();
             System.out.println("Solution 1 : \n\t" + solution1.getPenalty() + "\n\t" + solution1.getJumlahTimeslot());

@@ -2,7 +2,7 @@ package okhtemp;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import okhtemp.Utility;
+import okhtemp.RandomFunction;
 import okhtemp.Heuristics;
 
 public class MainLd {
@@ -28,7 +28,7 @@ public class MainLd {
         int[][] schedule = scheduler.getSchedule();
 
         scheduler.exportSchedule(dir_stu.substring(dir_stu.length() - 12, dir_stu.length() - 4));
-        System.out.println("Penalty : " + Utility.getPenalty(confMat, solution, student_total));
+        System.out.println("Penalty : " + RandomFunction.getPenalty(confMat, solution, student_total));
 
         for (int i = 0; i < schedule.length; i++) {
             System.out.println(schedule[i][0] + " " + schedule[i][1]);
