@@ -3,7 +3,7 @@ package okhtemp;
 import java.util.Arrays;
 import java.util.Scanner;
 import okhtemp.RandomFunctions;
-import okhtemp.Heuristics;
+import okhtemp.HillClimbing;
 
 public class MainLd {
 

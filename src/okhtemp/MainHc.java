@@ -2,7 +2,7 @@ package okhtemp;
 
 import java.util.Arrays;
 import java.util.Scanner;
-import okhtemp.Heuristics;
+import okhtemp.HillClimbing;
 import static okhtemp.MainLd.directory;
 
 public class MainHc {
@@ -77,7 +77,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime = System.nanoTime();
-                Heuristics.hillClimbing(dir_carf92_stu, dir_carf92_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_carf92_stu, dir_carf92_crs, 100, iterasi);
                 long endTime = System.nanoTime();
                 long totalTime = endTime - startTime;
                 System.out.println("Total waktu : " + (double) totalTime / 1000000000 + " detik");
@@ -87,7 +87,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime2 = System.nanoTime();
-                Heuristics.hillClimbing(dir_cars91_stu, dir_cars91_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_cars91_stu, dir_cars91_crs, 100, iterasi);
                 long endTime2 = System.nanoTime();
                 long totalTime2 = endTime2 - startTime2;
                 System.out.println("Total waktu : " + (double) totalTime2 / 1000000000 + " detik");
@@ -97,7 +97,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime3 = System.nanoTime();
-                Heuristics.hillClimbing(dir_earf83_stu, dir_earf83_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_earf83_stu, dir_earf83_crs, 100, iterasi);
                 long endTime3 = System.nanoTime();
                 long totalTime3 = endTime3 - startTime3;
                 System.out.println("Total waktu : " + (double) totalTime3 / 1000000000 + " detik");
@@ -108,7 +108,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime4 = System.nanoTime();
-                Heuristics.hillClimbing(dir_hecs92_stu, dir_hecs92_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_hecs92_stu, dir_hecs92_crs, 100, iterasi);
                 long endTime4 = System.nanoTime();
                 long totalTime4 = endTime4 - startTime4;
                 System.out.println("Total waktu : " + (double) totalTime4 / 1000000000 + " detik");
@@ -119,7 +119,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime5 = System.nanoTime();
-                Heuristics.hillClimbing(dir_kfus93_stu, dir_kfus93_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_kfus93_stu, dir_kfus93_crs, 100, iterasi);
                 long endTime5 = System.nanoTime();
                 long totalTime5 = endTime5 - startTime5;
                 System.out.println("Total waktu : " + (double) totalTime5 / 1000000000 + " detik");
@@ -130,7 +130,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime6 = System.nanoTime();
-                Heuristics.hillClimbing(dir_lsef91_stu, dir_lsef91_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_lsef91_stu, dir_lsef91_crs, 100, iterasi);
                 long endTime6 = System.nanoTime();
                 long totalTime6 = endTime6 - startTime6;
                 System.out.println("Total waktu : " + (double) totalTime6 / 1000000000 + " detik");
@@ -141,7 +141,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime7 = System.nanoTime();
-                Heuristics.hillClimbing(dir_purs93_stu, dir_purs93_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_purs93_stu, dir_purs93_crs, 100, iterasi);
                 long endTime7 = System.nanoTime();
                 long totalTime7 = endTime7 - startTime7;
                 System.out.println("Total waktu : " + (double) totalTime7 / 1000000000 + " detik");
@@ -152,7 +152,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime8 = System.nanoTime();
-                Heuristics.hillClimbing(dir_ryes93_stu, dir_ryes93_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_ryes93_stu, dir_ryes93_crs, 100, iterasi);
                 long endTime8 = System.nanoTime();
                 long totalTime8 = endTime8 - startTime8;
                 System.out.println("Total waktu : " + (double) totalTime8 / 1000000000 + " detik");
@@ -163,7 +163,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime9 = System.nanoTime();
-                Heuristics.hillClimbing(dir_staf83_stu, dir_staf83_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_staf83_stu, dir_staf83_crs, 100, iterasi);
                 long endTime9 = System.nanoTime();
                 long totalTime9 = endTime9 - startTime9;
                 System.out.println("Total waktu : " + (double) totalTime9 / 1000000000 + " detik");
@@ -174,7 +174,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime10 = System.nanoTime();
-                Heuristics.hillClimbing(dir_tres92_stu, dir_tres92_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_tres92_stu, dir_tres92_crs, 100, iterasi);
                 long endTime10 = System.nanoTime();
                 long totalTime10 = endTime10 - startTime10;
                 System.out.println("Total waktu : " + (double) totalTime10 / 1000000000 + " detik");
@@ -185,7 +185,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime11 = System.nanoTime();
-                Heuristics.hillClimbing(dir_utas92_stu, dir_utas92_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_utas92_stu, dir_utas92_crs, 100, iterasi);
                 long endTime11 = System.nanoTime();
                 long totalTime11 = endTime11 - startTime11;
                 System.out.println("Total waktu : " + (double) totalTime11 / 1000000000 + " detik");
@@ -196,7 +196,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime12 = System.nanoTime();
-                Heuristics.hillClimbing(dir_utes92_stu, dir_utes92_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_utes92_stu, dir_utes92_crs, 100, iterasi);
                 long endTime12 = System.nanoTime();
                 long totalTime12 = endTime12 - startTime12;
                 System.out.println("Total waktu : " + (double) totalTime12 / 1000000000 + " detik");
@@ -206,7 +206,7 @@ public class MainHc {
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime13 = System.nanoTime();
-                Heuristics.hillClimbing(dir_yorf83_stu, dir_yorf83_crs, 100, iterasi);
+                HillClimbing.hillClimbing(dir_yorf83_stu, dir_yorf83_crs, 100, iterasi);
                 long endTime13 = System.nanoTime();
                 long totalTime13 = endTime13 - startTime13;
                 System.out.println("Total waktu : " + (double) totalTime13 / 1000000000 + " detik");

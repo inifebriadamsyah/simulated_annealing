@@ -20,57 +20,57 @@ public class SimulatedAnnealing {
 
         Solution bestSolution = new Solution(solution);
 
-        int[][] sCurrent = RandomFunctions.copySolution(solution);
-        int[][] sBest = RandomFunctions.copySolution(sCurrent);
+        int[][] neighborSolution = RandomFunctions.copySolution(solution);
+        int[][] solutionFinal = RandomFunctions.copySolution(neighborSolution);
         double reductionFactor = 0.001;
-        double tempCurr = temperature;
+        double temperatureTemporary = temperature;
 
         for (int i = 0; i < iterasi; i++) {
-            int randomLLH = RandomFunctions.getRandomNumber(1, 5);
-            int[][] sIterasi;
+            int moveSwapRandomizer = RandomFunctions.getRandomNumber(1, 5);
+            int[][] iterasiLLH;
 
-            switch (randomLLH) {
+            switch (moveSwapRandomizer) {
                 case 1:
-                    sIterasi = RandomFunctions.move(RandomFunctions.copySolution(sCurrent), 1);
+                    iterasiLLH = RandomFunctions.move(RandomFunctions.copySolution(neighborSolution), 1);
                     break;
                 case 2:
-                    sIterasi = RandomFunctions.swap(RandomFunctions.copySolution(sCurrent), 1);
+                    iterasiLLH = RandomFunctions.swap(RandomFunctions.copySolution(neighborSolution), 1);
                     break;
                 case 3:
-                    sIterasi = RandomFunctions.move(RandomFunctions.copySolution(sCurrent), 2);
+                    iterasiLLH = RandomFunctions.move(RandomFunctions.copySolution(neighborSolution), 2);
                     break;
                 case 4:
-                    sIterasi = RandomFunctions.swap(RandomFunctions.copySolution(sCurrent), 3);
+                    iterasiLLH = RandomFunctions.swap(RandomFunctions.copySolution(neighborSolution), 3);
                     break;
                 case 5:
-                    sIterasi = RandomFunctions.move(RandomFunctions.copySolution(sCurrent), 3);
+                    iterasiLLH = RandomFunctions.move(RandomFunctions.copySolution(neighborSolution), 3);
                     break;
                 default:
-                    sIterasi = RandomFunctions.swap(RandomFunctions.copySolution(sCurrent), 1);
+                    iterasiLLH = RandomFunctions.swap(RandomFunctions.copySolution(neighborSolution), 1);
                     break;
             }
 
-            tempCurr = tempCurr * (1 - reductionFactor);
-            if (RandomFunctions.isNotTabrakan(confMat, sIterasi)) {
-                if (RandomFunctions.getPenalty(confMat, sIterasi, jumlahSiswa) <= RandomFunctions.getPenalty(confMat, sCurrent, jumlahSiswa)) {
-                    sCurrent = RandomFunctions.copySolution(sIterasi);
-                    if (RandomFunctions.getPenalty(confMat, sIterasi, jumlahSiswa) <= RandomFunctions.getPenalty(confMat, sBest, jumlahSiswa)) {
-                        sBest = RandomFunctions.copySolution(sIterasi);
-                        bestSolution.setSolution(sBest);
-                        bestSolution.setPenalty(RandomFunctions.getPenalty(confMat, sIterasi, jumlahSiswa));
+            temperatureTemporary = temperatureTemporary * (1 - reductionFactor);
+            if (RandomFunctions.isNotTabrakan(confMat, iterasiLLH)) {
+                if (RandomFunctions.getPenalty(confMat, iterasiLLH, jumlahSiswa) <= RandomFunctions.getPenalty(confMat, neighborSolution, jumlahSiswa)) {
+                    neighborSolution = RandomFunctions.copySolution(iterasiLLH);
+                    if (RandomFunctions.getPenalty(confMat, iterasiLLH, jumlahSiswa) <= RandomFunctions.getPenalty(confMat, solutionFinal, jumlahSiswa)) {
+                        solutionFinal = RandomFunctions.copySolution(iterasiLLH);
+                        bestSolution.setSolution(solutionFinal);
+                        bestSolution.setPenalty(RandomFunctions.getPenalty(confMat, iterasiLLH, jumlahSiswa));
                     }
-                } else if (Math.exp((RandomFunctions.getPenalty(confMat, sCurrent, jumlahSiswa) - RandomFunctions.getPenalty(confMat, sIterasi, jumlahSiswa)) / tempCurr) > Math.random()) {
-                    sCurrent = RandomFunctions.copySolution(sIterasi);
+                } else if (Math.exp((RandomFunctions.getPenalty(confMat, neighborSolution, jumlahSiswa) - RandomFunctions.getPenalty(confMat, iterasiLLH, jumlahSiswa)) / temperatureTemporary) > Math.random()) {
+                    neighborSolution = RandomFunctions.copySolution(iterasiLLH);
                 }
             }
 
             if ((i + 1) % 10 == 0) {
-                System.out.println("Iterasi ke-" + (i + 1) + " " + RandomFunctions.getPenalty(confMat, sCurrent, jumlahSiswa));
+                System.out.println("ke-" + (i + 1) + " " + RandomFunctions.getPenalty(confMat, neighborSolution, jumlahSiswa));
             }
 
         }
         System.out.println();
-        System.out.println("Penalty initial solution : " + RandomFunctions.getPenalty(confMat, RandomFunctions.getSaturationSchedule(courseSet.getSize(), cm.getDegree(), confMat), jumlahSiswa));
+        //System.out.println("Penalty initial solution : " + RandomFunctions.getPenalty(confMat, RandomFunctions.getSaturationSchedule(courseSet.getSize(), cm.getDegree(), confMat), jumlahSiswa));
         System.out.println("Penalty Terbaik : " + bestSolution.getPenalty());
         System.out.println("Jumlah timeslot : " + bestSolution.getJumlahTimeslot());
         int[][] bbest = bestSolution.getSolution();
@@ -79,6 +79,6 @@ public class SimulatedAnnealing {
             System.out.println(bbest[i][0] + " " + bbest[i][1]);
         }
 
-        solusiTerbaik = sBest;
+        solusiTerbaik = solutionFinal;
     }
 }

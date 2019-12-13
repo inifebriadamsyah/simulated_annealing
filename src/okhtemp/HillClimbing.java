@@ -2,7 +2,7 @@ package okhtemp;
 
 import okhtemp.RandomFunctions;
 
-public class Heuristics {
+public class HillClimbing {
 
     private static int[][] bestSchedule;
 
@@ -59,12 +59,12 @@ public class Heuristics {
     }
 
     public static void hillClimbing(String dir_stu, String dir_crs, int timeslot, int iterasi) {
-        CourseSet cs = new CourseSet(dir_crs);
-        ConflictMatrix cm = new ConflictMatrix(dir_stu, cs.getSize());
+        CourseSet courseSet = new CourseSet(dir_crs);
+        ConflictMatrix cm = new ConflictMatrix(dir_stu, courseSet.getSize());
 
 //		int [][] confMat = cm.getConflictMatrix();
         int[][] conflict_matrix = cm.getMatrix();
-        int[][] jadwal = SchedulerFunctions.getSaturationSchedule(cs.getSize(), cm.getDegree(), conflict_matrix);
+        int[][] jadwal = SchedulerFunctions.getSaturationSchedule(courseSet.getSize(), cm.getDegree(), conflict_matrix);
 //		int jumlahTimeslot = timeslot;
 
 //		Scheduler scheduler = new Scheduler(cs.getSize());
@@ -73,11 +73,11 @@ public class Heuristics {
         int jumlahStudent = cm.getJumlahStudent();
 
 //		int[][] jadwal = scheduler.getSchedule();
-        int[][] jadwalTemp = new int[jadwal.length][2];
+        int[][] jadwalNeighbor = new int[jadwal.length][2];
 
-        for (int i = 0; i < jadwalTemp.length; i++) {
-            jadwalTemp[i][0] = jadwal[i][0];
-            jadwalTemp[i][1] = jadwal[i][1];
+        for (int i = 0; i < jadwalNeighbor.length; i++) {
+            jadwalNeighbor[i][0] = jadwal[i][0];
+            jadwalNeighbor[i][1] = jadwal[i][1];
         }
 
         double penalty = RandomFunctions.getPenalty(conflict_matrix, jadwal, jumlahStudent);
@@ -90,17 +90,17 @@ public class Heuristics {
             int randomCourseIndex = RandomFunctions.getRandomNumber(0, conflict_matrix.length - 1);
             int randomTimeslot = RandomFunctions.getRandomNumber(0, max_timeslot - 1);
 
-            if (SchedulerFunctions.checkRandomTimeslot(randomCourseIndex, randomTimeslot, conflict_matrix, jadwalTemp)) {
-                jadwalTemp[randomCourseIndex][1] = randomTimeslot;
-                double penalty2 = RandomFunctions.getPenalty(conflict_matrix, jadwalTemp, jumlahStudent);
+            if (SchedulerFunctions.checkRandomTimeslot(randomCourseIndex, randomTimeslot, conflict_matrix, jadwalNeighbor)) {
+                jadwalNeighbor[randomCourseIndex][1] = randomTimeslot;
+                double penalty2 = RandomFunctions.getPenalty(conflict_matrix, jadwalNeighbor, jumlahStudent);
 
                 if (penalty > penalty2) {
-                    penalty = RandomFunctions.getPenalty(conflict_matrix, jadwalTemp, jumlahStudent);
-                    jadwal[randomCourseIndex][1] = jadwalTemp[randomCourseIndex][1];
+                    penalty = RandomFunctions.getPenalty(conflict_matrix, jadwalNeighbor, jumlahStudent);
+                    jadwal[randomCourseIndex][1] = jadwalNeighbor[randomCourseIndex][1];
                     bestSolution.setSolution(jadwal);
                     bestSolution.setPenalty(penalty);
                 } else {
-                    jadwalTemp[randomCourseIndex][1] = jadwal[randomCourseIndex][1];
+                    jadwalNeighbor[randomCourseIndex][1] = jadwal[randomCourseIndex][1];
                 }
             }
             if ((i + 1) % 10 == 0) {
