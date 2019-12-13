@@ -78,6 +78,7 @@ public class MainGa {
                 long totalTime = endTime - startTime;
                 System.out.println("Total waktu : " + (double) totalTime / 1000000000 + " detik");
                 break;
+                
             case 2:
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
@@ -87,6 +88,7 @@ public class MainGa {
                 long totalTime2 = endTime2 - startTime2;
                 System.out.println("Total waktu : " + (double) totalTime2 / 1000000000 + " detik");
                 break;
+                
             case 3:
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
@@ -96,6 +98,7 @@ public class MainGa {
                 long totalTime3 = endTime3 - startTime3;
                 System.out.println("Total waktu : " + (double) totalTime3 / 1000000000 + " detik");
                 break;
+                
             case 4:
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
@@ -105,6 +108,7 @@ public class MainGa {
                 long totalTime4 = endTime4 - startTime4;
                 System.out.println("Total waktu : " + (double) totalTime4 / 1000000000 + " detik");
                 break;
+                
             case 5:
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
@@ -114,6 +118,7 @@ public class MainGa {
                 long totalTime5 = endTime5 - startTime5;
                 System.out.println("Total waktu : " + (double) totalTime5 / 1000000000 + " detik");
                 break;
+                
             case 6:
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
@@ -123,6 +128,7 @@ public class MainGa {
                 long totalTime6 = endTime6 - startTime6;
                 System.out.println("Total waktu : " + (double) totalTime6 / 1000000000 + " detik");
                 break;
+                
             case 7:
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
@@ -132,6 +138,7 @@ public class MainGa {
                 long totalTime7 = endTime7 - startTime7;
                 System.out.println("Total waktu : " + (double) totalTime7 / 1000000000 + " detik");
                 break;
+                
             case 8:
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
@@ -141,6 +148,7 @@ public class MainGa {
                 long totalTime8 = endTime8 - startTime8;
                 System.out.println("Total waktu : " + (double) totalTime8 / 1000000000 + " detik");
                 break;
+                
             case 9:
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
@@ -150,6 +158,7 @@ public class MainGa {
                 long totalTime9 = endTime9 - startTime9;
                 System.out.println("Total waktu : " + (double) totalTime9 / 1000000000 + " detik");
                 break;
+                
             case 10:
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
@@ -159,6 +168,7 @@ public class MainGa {
                 long totalTime10 = endTime10 - startTime10;
                 System.out.println("Total waktu : " + (double) totalTime10 / 1000000000 + " detik");
                 break;
+                
             case 11:
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
@@ -168,6 +178,7 @@ public class MainGa {
                 long totalTime11 = endTime11 - startTime11;
                 System.out.println("Total waktu : " + (double) totalTime11 / 1000000000 + " detik");
                 break;
+                
             case 12:
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
@@ -177,6 +188,7 @@ public class MainGa {
                 long totalTime12 = endTime12 - startTime12;
                 System.out.println("Total waktu : " + (double) totalTime12 / 1000000000 + " detik");
                 break;
+                
             case 13:
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
@@ -186,6 +198,7 @@ public class MainGa {
                 long totalTime13 = endTime13 - startTime13;
                 System.out.println("Total waktu : " + (double) totalTime13 / 1000000000 + " detik");
                 break;
+                
             case 100:
                 System.out.println("Bye...");
                 System.exit(0);
