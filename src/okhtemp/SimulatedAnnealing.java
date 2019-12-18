@@ -64,8 +64,8 @@ public class SimulatedAnnealing {
                 }
             }
 
-            if ((i + 1) % 10 == 0) {
-                System.out.println("ke-" + (i + 1) + " " + RandomFunctions.getPenalty(confMat, neighborSolution, jumlahSiswa));
+            if ((i + 1) % 1000 == 0) {
+                System.out.println("Iterasi - " + (i + 1) + " " + RandomFunctions.getPenalty(confMat, neighborSolution, jumlahSiswa));
             }
 
         }

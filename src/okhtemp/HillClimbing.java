@@ -103,8 +103,8 @@ public class HillClimbing {
                     jadwalNeighbor[randomCourseIndex][1] = jadwal[randomCourseIndex][1];
                 }
             }
-            if ((i + 1) % 10 == 0) {
-                System.out.println(penalty);
+            if ((i + 1) % 1000 == 0) {
+                System.out.println("Iterasi - " + (i + 1) + " " + penalty);
             }
         }
 
