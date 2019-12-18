@@ -77,7 +77,7 @@ public class MainSa{
                 System.out.print("Jumlah Iterasi : ");
                 iterasi = in.nextInt();
                 long startTime = System.nanoTime();
-                SimulatedAnnealing.run(dir_carf92_stu, dir_carf92_crs, 100, iterasi);
+                SimulatedAnnealing.run(dir_carf92_stu, dir_carf92_crs, 1000, iterasi);
                 long endTime = System.nanoTime();
                 long totalTime = endTime - startTime;
                 System.out.println("Total waktu : " + (double) totalTime / 1000000000 + " detik");

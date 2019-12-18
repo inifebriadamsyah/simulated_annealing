@@ -40,7 +40,6 @@ public class RandomFunctions {
     public static double getPenalty(int[][] matrix, int[][] jadwal, int jumlah) {
         double penalty = 0;
         double cheats = 0.2456;
-
         for (int i = 0; i < matrix.length - 1; i++) {
             for (int j = i + 1; j < matrix.length; j++) {
                 if (matrix[i][j] != 0) {
@@ -50,7 +49,7 @@ public class RandomFunctions {
                 }
             }
         }
-        return (penalty / jumlah)-cheats;
+        return (penalty / jumlah);
     }
     
     public static int getRandomNumber(int min, int max) {

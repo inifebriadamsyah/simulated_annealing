@@ -104,7 +104,7 @@ public class HillClimbing {
                 }
             }
             if ((i + 1) % 10 == 0) {
-                System.out.println("Iterasi " + (i + 1) + " - Penalty : " + penalty);
+                System.out.println(penalty);
             }
         }
 

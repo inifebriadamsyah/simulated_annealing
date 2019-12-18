@@ -83,14 +83,14 @@ public class GeneticAlgorithm {
 
         ArrayList<Solution> population = generatePopulation(cs, cm, populationSize);
 
-        int iter = 0;
+        int currentIterarion = 0;
 
         Solution bestSolution = new Solution(cs.getSize());
 
         bestSolution.setSolution(RandomFunctions.copySolution(population.get(0).getSolution()));
         bestSolution.setPenalty(RandomFunctions.getPenalty(conflictMatrix, bestSolution.getSolution(), jumlahStudent));
 
-        while (iter < iterasi) {
+        while (currentIterarion < iterasi) {
             population.sort((o1, o2) -> o1.getPenalty().compareTo(o2.getPenalty()));
 
             // Recombination
@@ -138,22 +138,22 @@ public class GeneticAlgorithm {
             }
 
             if (RandomFunctions.isNotTabrakan(conflictMatrix, solution1.getSolution()) && RandomFunctions.isNotTabrakan(conflictMatrix, solution2.getSolution())) {
-                if ((iter + 1) % 10 == 0) {
+                if ((currentIterarion + 1) % 10 == 0) {
                     if (solution1.getPenalty() < solution2.getPenalty()) {
-                        System.out.println("Iterasi ke-" + (iter + 1) + " " + solution1.getPenalty());
+                        System.out.println("Iterasi ke-" + (currentIterarion + 1) + " " + solution1.getPenalty());
                     } else {
-                        System.out.println("Iterasi ke-" + (iter + 1) + " " + solution2.getPenalty());
+                        System.out.println("Iterasi ke-" + (currentIterarion + 1) + " " + solution2.getPenalty());
                     }
                 }
             } else {
-                if ((iter + 1) % 10 == 0) {
-                    System.out.println("Iterasi ke-" + (iter + 1) + " " + bestSolution.getPenalty());
+                if ((currentIterarion + 1) % 10 == 0) {
+                    System.out.println("Iterasi ke-" + (currentIterarion + 1) + " " + bestSolution.getPenalty());
                 }
             }
 
             population = generatePopulation(cs, cm, populationSize);
 
-            iter++;
+            currentIterarion++;
 
         }
 
