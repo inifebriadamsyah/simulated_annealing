@@ -54,7 +54,7 @@ public class HillClimbing {
                 penalty = penaltyTemp;
             }
 
-            System.out.println("Iterasi " + (i + 1) + " - Penalty : " + penalty);
+            System.out.println("Iterasi-" + (i + 1) + penalty);
         }
     }
 
